@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Images/Maze_Knights_Background.png</file>
+        <file>Images/Apear-Sheet.png</file>
+        <file>Images/background.png</file>
+        <file>Images/Black-Circle-Fade-Sphere-PNG-Transparent-Images.png</file>
+        <file>Images/Death.png</file>
+        <file>Images/Death-Sheet.png</file>
+        <file>Images/Dessapear-Sheet.png</file>
+        <file>Images/Hunter.png</file>
+        <file>Images/Huntera.png</file>
+        <file>Images/Huntera-Sheet.png</file>
+        <file>Images/Hunter-Sheet.png</file>
+        <file>Images/Wall.png</file>
+        <file>Images/Blocked_Wall.png</file>
+        <file>Images/Above_Block.png</file>
+        <file>Images/Below_Block.png</file>
+        <file>Images/Left_Block.png</file>
+        <file>Images/Right_Block.png</file>
+    </qresource>
+</RCC>
