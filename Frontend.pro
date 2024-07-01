@@ -14,7 +14,8 @@ SOURCES += \
     Node.cpp \
     gamewindow.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    powers.cpp
 
 HEADERS += \
     Graph.h \
@@ -22,7 +23,8 @@ HEADERS += \
     Matrix.h \
     Node.h \
     gamewindow.h \
-    mainwindow.h
+    mainwindow.h \
+    powers.h
 
 FORMS += \
     gamewindow.ui \

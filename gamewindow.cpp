@@ -1,12 +1,14 @@
 #include "gamewindow.h"
 #include "build/Desktop_Qt_6_7_1_MinGW_64_bit-Debug/ui_gamewindow.h"
 #include "Matrix.h"
+#include "powers.h"
+#include <QMessageBox>
 Matrix *m;
+//powers *pow;
 
 gamewindow::gamewindow(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::gamewindow)
-{
+    , ui(new Ui::gamewindow){
     ui->setupUi(this);
     initializeNodeMatrix();
     loadBackground();
@@ -14,15 +16,14 @@ gamewindow::gamewindow(QWidget *parent)
     generateWalls();
     wayMaker();
     loadHunters();
+    initializePowers();
 }
 
-gamewindow::~gamewindow()
-{
+gamewindow::~gamewindow(){
     delete ui;
 }
 
-void gamewindow::initializeNodeMatrix()
-{
+void gamewindow::initializeNodeMatrix(){
     m = new Matrix(laberynthHeightSize, laberynthWidthSize);
     m->printMatrix();
     printf("\n");
@@ -32,24 +33,21 @@ void gamewindow::initializeNodeMatrix()
     m->connectAdjNodes();
 }
 
-void gamewindow::loadBackground()
-{
+void gamewindow::loadBackground(){
     this->resize(windowWidth, windowHeigth);
     QPixmap pix(":/Images/background.png");
     ui->label->resize(windowWidth, windowHeigth);
     ui->label->setPixmap(pix.scaled(windowWidth,windowHeigth));
 }
 
-void gamewindow::initializeBoxArray()
-{
+void gamewindow::initializeBoxArray(){
     for (int i = 0; i<laberynthHeightSize; i++)
     {
         boxArray[i] = new QLabel*[laberynthWidthSize];
     }
 }
 
-void gamewindow::buildLaberynth()
-{
+void gamewindow::buildLaberynth(){
     initializeBoxArray();
     int heightGap = 0;
     for (int i = 0; i<laberynthHeightSize; i++)
@@ -76,8 +74,7 @@ void gamewindow::buildLaberynth()
     }
 }
 
-void gamewindow::initializeWallArray()
-{
+void gamewindow::initializeWallArray(){
     for (int i = 0; i<laberynthHeightSize; i++)
     {
         wallArray[i] = new QLabel**[laberynthWidthSize];
@@ -88,27 +85,22 @@ void gamewindow::initializeWallArray()
     }
 }
 
-void gamewindow::initializePixArray()
-{
+void gamewindow::initializePixArray(){
     pixArray[0] = QPixmap(":/Images/Above_Block.png");
     pixArray[1] = QPixmap(":/Images/Right_Block.png");
     pixArray[2] = QPixmap(":/Images/Below_Block.png");
     pixArray[3] = QPixmap(":/Images/Left_Block.png");
 }
 
-void gamewindow::generateWalls()
-{
+void gamewindow::generateWalls(){
     initializeWallArray();
     initializePixArray();
 
     int heightGap = 0;
-    for (int i = 0; i<laberynthHeightSize; i++)
-    {
+    for (int i = 0; i<laberynthHeightSize; i++){
         int widthGap = 0;
-        for (int j = 0; j<laberynthWidthSize; j++)
-        {
-            for (int k = 0; k<4; k++)
-            {
+        for (int j = 0; j<laberynthWidthSize; j++){
+            for (int k = 0; k<4; k++){
                 wallArray[i][j][k] = new QLabel("", this);
                 int marginWidthCenter = laberynthWidthSize/2;
                 int marginHeigthCenter = laberynthHeightSize/2;
@@ -123,21 +115,15 @@ void gamewindow::generateWalls()
     }
 }
 
-void gamewindow::wayMaker()
-{
+void gamewindow::wayMaker(){
     int openedPath = -1;
-    for (int i=0; i<laberynthHeightSize; i++)
-    {
-        for (int j=0; j<laberynthWidthSize; j++)
-        {
+    for (int i=0; i<laberynthHeightSize; i++){
+        for (int j=0; j<laberynthWidthSize; j++){
             m->updateCurrentNode(i, j);
-            for (int k=0; k<4; k++)
-            {
+            for (int k=0; k<4; k++){
                 openedPath = m->getNodePath(i,j);
-                if (openedPath != -1)
-                {
-                    if (wallArray[i][j][openedPath] != nullptr)
-                    {
+                if (openedPath != -1){
+                    if (wallArray[i][j][openedPath] != nullptr){
                         wallArray[i][j][openedPath]->setPixmap(QPixmap());
                     }
                 }
@@ -150,8 +136,7 @@ void gamewindow::wayMaker()
     }
 }
 
-void gamewindow::loadHunters()
-{
+void gamewindow::loadHunters(){
     //Hunter #1
     QPoint position1 = boxArray[0][0]->pos();
     leftLimit = position1.x();
@@ -175,98 +160,88 @@ void gamewindow::loadHunters()
     ui->label_3->raise();
 }
 
-void gamewindow::keyPressEvent(QKeyEvent *event)
-{
+void gamewindow::keyPressEvent(QKeyEvent *event){
     int step = boxSize;
     int x1 = ui->label_2->x();
     int y1 = ui->label_2->y();
     int x2 = ui->label_3->x();
     int y2 = ui->label_3->y();
 
-    if (turn == false)
-    {
-        if (event->key() == Qt::Key_Left && x1>leftLimit)
-        {
+    if (turn == false){
+        if (event->key() == Qt::Key_Left && x1>leftLimit){
             QPixmap pixmap = wallArray[currentRowPlayer1][currentColumnPlayer1][3]->pixmap();
-            if (pixmap.isNull() == 1)
-            {
+            if (pixmap.isNull() == 1){
                 x1 -= step;
                 currentColumnPlayer1 -= 1;
+                winValidation(false, x1, y1);
                 turn = true;
             }
         }
-        else if (event->key() == Qt::Key_Right && x1<rightLimit)
-        {
+        else if (event->key() == Qt::Key_Right && x1<rightLimit){
             QPixmap pixmap = wallArray[currentRowPlayer1][currentColumnPlayer1][1]->pixmap();
-            if (pixmap.isNull() == 1)
-            {
+            if (pixmap.isNull() == 1){
                 x1 += step;
                 currentColumnPlayer1 += 1;
+                winValidation(false, x1, y1);
                 turn = true;
             }
         }
-        else if (event->key() == Qt::Key_Up && y1>aboveLimit)
-        {
+        else if (event->key() == Qt::Key_Up && y1>aboveLimit){
             QPixmap pixmap = wallArray[currentRowPlayer1][currentColumnPlayer1][0]->pixmap();
-            if (pixmap.isNull() == 1)
-            {
+            if (pixmap.isNull() == 1){
                 y1 -= step;
                 currentRowPlayer1 -= 1;
+                winValidation(false, x1, y1);
                 turn = true;
             }
         }
-        else if(event->key() == Qt::Key_Down && y1<belowLimit)
-        {
+        else if(event->key() == Qt::Key_Down && y1<belowLimit){
             QPixmap pixmap = wallArray[currentRowPlayer1][currentColumnPlayer1][2]->pixmap();
-            if (pixmap.isNull() == 1)
-            {
+            if (pixmap.isNull() == 1){
                 y1 += step;
                 currentRowPlayer1 += 1;
+                winValidation(false, x1, y1);
                 turn = true;
             }
         }
         ui->label_2->move(x1, y1);
         //turn = true;
     }
-    if (turn == true)
-    {
-        if (event->key() == Qt::Key_A && x2>leftLimit)
-        {
+    if (turn == true){
+        if (event->key() == Qt::Key_A && x2>leftLimit){
             QPixmap pixmap = wallArray[currentRowPlayer2][currentColumnPlayer2][3]->pixmap();
             if (pixmap.isNull() == 1)
             {
                 x2 -= step;
                 currentColumnPlayer2 -= 1;
+                winValidation(true, x2, y2);
                 turn = false;
             }
         }
-        else if (event->key() == Qt::Key_D && x2<rightLimit)
-        {
+        else if (event->key() == Qt::Key_D && x2<rightLimit){
             QPixmap pixmap = wallArray[currentRowPlayer2][currentColumnPlayer2][1]->pixmap();
-            if (pixmap.isNull() == 1)
-            {
+            if (pixmap.isNull() == 1){
                 x2 += step;
                 currentColumnPlayer2 += 1;
+                winValidation(true, x2, y2);
                 turn = false;
             }
         }
-        else if (event->key() == Qt::Key_W && y2>aboveLimit)
-        {
+        else if (event->key() == Qt::Key_W && y2>aboveLimit){
             QPixmap pixmap = wallArray[currentRowPlayer2][currentColumnPlayer2][0]->pixmap();
-            if (pixmap.isNull() == 1)
-            {
+            if (pixmap.isNull() == 1){
                 y2 -= step;
                 currentRowPlayer2 -= 1;
+                winValidation(true, x2, y2);
                 turn = false;
             }
         }
-        else if(event->key() == Qt::Key_S && y2<belowLimit)
-        {
+        else if(event->key() == Qt::Key_S && y2<belowLimit){
             QPixmap pixmap = wallArray[currentRowPlayer2][currentColumnPlayer2][2]->pixmap();
-            if (pixmap.isNull() == 1)
-            {
+            if (pixmap.isNull() == 1){
                 y2 += step;
                 currentRowPlayer2 += 1;
+                winValidation(true, x2, y2);
                 turn = false;
             }
         }
@@ -274,3 +249,34 @@ void gamewindow::keyPressEvent(QKeyEvent *event)
         //turn = false;
     }
 }
+
+void gamewindow::initializePowers(){
+    QLabel *label = new QLabel(this);
+    QPixmap pixmap(":/Images/Bounty Chest.png");
+    label->setPixmap(pixmap.scaled(boxSize, boxSize));
+    winx = (this->width() / 2);
+    winy = (this->height() / 2);
+    label->setGeometry(winx, winy, boxSize, boxSize);
+    label->show();
+}
+
+void gamewindow::winValidation(bool turn, int posx, int posy){
+    QString winner ="";
+    if(turn == false){
+        winner = "You're the winner Player 1";
+    }
+    else{
+        winner = "You're the winner Player 2";
+    }
+    if(posx == winx && posy == winy)
+    {
+        QMessageBox msgBox;
+        msgBox.setText(winner);
+        msgBox.exec();
+    }
+}
+
+
+
+
+

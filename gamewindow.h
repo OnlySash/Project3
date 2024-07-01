@@ -31,7 +31,6 @@ private:
 
     // QMediaPlayer *mMediaPlayer;
     // QAudioOutput *mAudioOutput;
-
     // QMediaPlayer *bMediaPlayer;
     // QMediaPlayer *bAudioOutput;
 
@@ -41,10 +40,7 @@ private:
     const int boxSize = 50;
     const int laberynthHeightSize = 10;
     const int laberynthWidthSize = 10;
-
     //Instances
-
-
     //Methods
     void initializeNodeMatrix();
     void loadBackground();
@@ -55,6 +51,8 @@ private:
     void generateWalls();
     void wayMaker();
     void loadHunters();
+    void initializePowers();
+    void winValidation(bool turn, int posx, int posy);
 
     //Global variables from the class
     QLabel ***boxArray = new QLabel**[laberynthHeightSize];
@@ -69,6 +67,8 @@ private:
     int currentRowPlayer1 = 0;
     int currentColumnPlayer2 = laberynthWidthSize-1;
     int currentRowPlayer2 = laberynthHeightSize-1;
+    int winx = 0;
+    int winy = 0;
 };
 
 #endif // GAMEWINDOW_H
