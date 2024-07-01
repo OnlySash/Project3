@@ -4,7 +4,6 @@
 #include "powers.h"
 #include <QMessageBox>
 Matrix *m;
-//powers *pow;
 
 gamewindow::gamewindow(QWidget *parent)
     : QWidget(parent)
@@ -17,6 +16,7 @@ gamewindow::gamewindow(QWidget *parent)
     wayMaker();
     loadHunters();
     initializePowers();
+    initializeTresure();
 }
 
 gamewindow::~gamewindow(){
@@ -127,8 +127,7 @@ void gamewindow::wayMaker(){
                         wallArray[i][j][openedPath]->setPixmap(QPixmap());
                     }
                 }
-                else
-                {
+                else{
                     break;
                 }
             }
@@ -250,7 +249,7 @@ void gamewindow::keyPressEvent(QKeyEvent *event){
     }
 }
 
-void gamewindow::initializePowers(){
+void gamewindow::initializeTresure(){
     QLabel *label = new QLabel(this);
     QPixmap pixmap(":/Images/Bounty Chest.png");
     label->setPixmap(pixmap.scaled(boxSize, boxSize));
@@ -260,6 +259,39 @@ void gamewindow::initializePowers(){
     label->show();
 }
 
+void gamewindow::generateImages(QPixmap pixmap, int posx, int posy)
+{
+    QLabel *label = new QLabel(this);
+    label->setPixmap(pixmap.scaled(boxSize, boxSize));
+    label->setGeometry(posx, posy, boxSize, boxSize);
+    label->show();
+}
+
+/*
+void initializePowers(){
+    powers pow;
+    int posx;
+    int posy;
+    for(int i=0; i<6; i++){
+        posx =pow.random(10);
+        posy =pow.random(10);
+        //DOUBLE_PLAY
+        if(i<=2){
+            QPixmap pixmap(":/Images/Black-Circle-Fade-Sphere-PNG-Transparent-Images.png");
+            generateImages(pixmap, posx, posy);
+        }
+        //CONTROL_ENEMY
+        else if(i>2 &&i<=4){
+
+        }
+        //JUMP_WALL
+        else{
+
+        }
+    }
+}
+*/
+
 void gamewindow::winValidation(bool turn, int posx, int posy){
     QString winner ="";
     if(turn == false){
@@ -268,15 +300,12 @@ void gamewindow::winValidation(bool turn, int posx, int posy){
     else{
         winner = "You're the winner Player 2";
     }
-    if(posx == winx && posy == winy)
-    {
+    if(posx == winx && posy == winy){
         QMessageBox msgBox;
         msgBox.setText(winner);
         msgBox.exec();
     }
 }
-
-
 
 
 

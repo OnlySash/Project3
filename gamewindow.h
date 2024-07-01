@@ -5,6 +5,7 @@
 #include <QKeyEvent>
 #include <QPixmap>
 #include <QGraphicsOpacityEffect>
+#include "powers.h"
 // #include <QMediaPlayer>
 // #include <QAudioOutput>
 #include <iostream>
@@ -22,6 +23,7 @@ class gamewindow : public QWidget
 public:
     gamewindow(QWidget *parent = nullptr);
     ~gamewindow();
+    void generateImages(QPixmap pixmap, int posx, int posy);
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;
@@ -40,7 +42,6 @@ private:
     const int boxSize = 50;
     const int laberynthHeightSize = 10;
     const int laberynthWidthSize = 10;
-    //Instances
     //Methods
     void initializeNodeMatrix();
     void loadBackground();
@@ -52,6 +53,7 @@ private:
     void wayMaker();
     void loadHunters();
     void initializePowers();
+    void initializeTresure();
     void winValidation(bool turn, int posx, int posy);
 
     //Global variables from the class
