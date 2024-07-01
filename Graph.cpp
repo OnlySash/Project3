@@ -26,24 +26,17 @@ void Graph<T>::addEdge(Node<T>* src, Node<T>* dest) {
 }
 
 template<typename T>
-void Graph<T>::deleteEdges(Node<T>* src, std::unordered_map<Node<T>*, bool> visited) {
-    std::vector<Node<T>*> edgesArray; //*[4]
+void Graph<T>::deleteEdges(Node<T>* src, std::unordered_map<Node<T>*, bool>& visited) {
+    std::vector<Node<T>*> edgesToRemove;
     for (auto it = adjLists[src].begin(); it != adjLists[src].end(); ++it) {
-        if (!visited[*it]) 
-            edgesArray.push_back(*it);
+        if (!visited[*it]) {
+            edgesToRemove.push_back(*it);
+        }
     }
-    // printf("\nCurrent Node, %i", src->getData());
-    if (!edgesArray.empty())
-    {
-        int arrayLimit = edgesArray.size();
-        Node<T>* node = edgesArray[0];
-        //printf("\nNode, %i", node->getData());
-        for (int i = 0; i < arrayLimit; i++) {
-            // printf("\nEdgesArray[%i], %i", i, edgesArray[i]->getData());
-            if (edgesArray[i] != node) {
-                adjLists[src].remove(edgesArray[i]);
-                adjLists[edgesArray[i]].remove(src);
-            }
+    for (Node<T>* neighbor : edgesToRemove) {
+        if(neighbor != edgesToRemove[0]){
+            adjLists[src].remove(neighbor);
+            adjLists[neighbor].remove(src);
         }
     }
 }
@@ -58,37 +51,30 @@ void Graph<T>::DFS(Node<T>* startVertex) {
     std::unordered_map<Node<T>*, bool> visited;
     std::stack<Node<T>*> stack;
     stack.push(startVertex);
-    string output;
+
+    std::random_device rd;
+    std::mt19937 g(rd());
+
     while (!stack.empty()) {
         Node<T>* vertex = stack.top();
         stack.pop();
 
         if (!visited[vertex]) {
-            deleteEdges(vertex, visited);
-            // for (auto it = adjLists[vertex].rbegin(); it != adjLists[vertex].rend(); ++it) {
-            //     Node<T>* node = *it;
-            //     printf("\nVertex: %i, Adyacent Node: %i\n", (*vertex).getData(),(*node).getData());
-            // }
-            std::cout << vertex->getData() << " ";
             visited[vertex] = true;
-        }
-        for (auto it = adjLists[vertex].rbegin(); it != adjLists[vertex].rend(); ++it) {
-            if (!visited[*it]) {
-                // Node<T>* node = *it;
-                // printf("\nIn Stack Vertex: %i, Adyacent Node: %i\n", (*vertex).getData(),(*node).getData());
-                stack.push(*it);
+            deleteEdges(vertex, visited);
+            std::cout << vertex->getData() << " ";
+
+            // Obtener vecinos en un orden aleatorio
+            std::vector<Node<T>*> neighbors(adjLists[vertex].begin(), adjLists[vertex].end());
+            std::shuffle(neighbors.begin(), neighbors.end(), g);
+
+            // Agregar vecinos no visitados a la pila
+            for (Node<T>* neighbor : neighbors) {
+                if (!visited[neighbor]) {
+                    stack.push(neighbor);
+                }
             }
-            // Node<T>* node = *it;
-            // printf("\nVertex: %i, Adyacent Node: %i\n", (*vertex).getData(),(*node).getData());
         }
-        // if (!visited[vertex]) {
-        //     Node<T>* nextVertex = stack.top();
-        //     deleteEdges(vertex, nextVertex, visited);
-        //     for (auto it = adjLists[vertex].rbegin(); it != adjLists[vertex].rend(); ++it) {
-        //         Node<T>* node = *it;
-        //         printf("\nVertex: %i, Adyacent Node: %i\n", (*vertex).getData(),(*node).getData());
-        //     }
-        // }
     }
 }
 

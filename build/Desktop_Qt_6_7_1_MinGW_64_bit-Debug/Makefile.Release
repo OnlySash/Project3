@@ -16,7 +16,7 @@ CXX           = g++
 DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -DQT_QML_DEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
 CFLAGS        = -fno-keep-inline-dllexport -O2 -Wall -Wextra -Wextra $(DEFINES)
 CXXFLAGS      = -fno-keep-inline-dllexport -O2 -std=gnu++1z -Wall -Wextra -Wextra -fexceptions -mthreads $(DEFINES)
-INCPATH       = -I../../../Frontend -I. -IC:/Qt/6.7.1/mingw_64/include -IC:/Qt/6.7.1/mingw_64/include/QtWidgets -IC:/Qt/6.7.1/mingw_64/include/QtGui -IC:/Qt/6.7.1/mingw_64/include/QtCore -Irelease -I. -I/include -IC:/Qt/6.7.1/mingw_64/mkspecs/win32-g++ 
+INCPATH       = -I../../../Project3 -I. -IC:/Qt/6.7.1/mingw_64/include -IC:/Qt/6.7.1/mingw_64/include/QtWidgets -IC:/Qt/6.7.1/mingw_64/include/QtGui -IC:/Qt/6.7.1/mingw_64/include/QtCore -Irelease -I. -I/include -IC:/Qt/6.7.1/mingw_64/mkspecs/win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -Wl,-subsystem,windows -mthreads
 LIBS        =        C:\Qt\6.7.1\mingw_64\lib\libQt6Widgets.a C:\Qt\6.7.1\mingw_64\lib\libQt6Gui.a C:\Qt\6.7.1\mingw_64\lib\libQt6Core.a -lmingw32 C:\Qt\6.7.1\mingw_64\lib\libQt6EntryPoint.a -lshell32  
@@ -117,6 +117,7 @@ release/qrc_Images.cpp: ../../Images.qrc \
 		../../Images/Below_Block.png \
 		../../Images/Hunter.png \
 		../../Images/Right_Block.png \
+		../../Images/Bounty\ Chest.png \
 		../../Images/background.png \
 		../../Images/Wall.png \
 		../../Images/Huntera.png \
@@ -340,7 +341,7 @@ release/moc_gamewindow.cpp: ../../gamewindow.h \
 		C:/Qt/6.7.1/mingw_64/include/QtWidgets/qgraphicseffect.h \
 		release/moc_predefs.h \
 		C:/Qt/6.7.1/mingw_64/bin/moc.exe
-	C:\Qt\6.7.1\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/leocr/OneDrive/Documentos/UCR/Materiales/Año 2/1° Semestre/Programación 2/Proyecto 3/Project3_Frontend/Frontend/build/Desktop_Qt_6_7_1_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.7.1/mingw_64/mkspecs/win32-g++ -I"C:/Users/leocr/OneDrive/Documentos/UCR/Materiales/Año 2/1° Semestre/Programación 2/Proyecto 3/Project3_Frontend/Frontend" -IC:/Qt/6.7.1/mingw_64/include -IC:/Qt/6.7.1/mingw_64/include/QtWidgets -IC:/Qt/6.7.1/mingw_64/include/QtGui -IC:/Qt/6.7.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\gamewindow.h -o release\moc_gamewindow.cpp
+	C:\Qt\6.7.1\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/gerar/Documents/UCR/Cursos/Programacion II/Proyectos Programados/Project3/build/Desktop_Qt_6_7_1_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.7.1/mingw_64/mkspecs/win32-g++ -I"C:/Users/gerar/Documents/UCR/Cursos/Programacion II/Proyectos Programados/Project3" -IC:/Qt/6.7.1/mingw_64/include -IC:/Qt/6.7.1/mingw_64/include/QtWidgets -IC:/Qt/6.7.1/mingw_64/include/QtGui -IC:/Qt/6.7.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\gamewindow.h -o release\moc_gamewindow.cpp
 
 release/moc_mainwindow.cpp: ../../mainwindow.h \
 		../../gamewindow.h \
@@ -544,7 +545,7 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.7.1/mingw_64/include/QtWidgets/qtabwidget.h \
 		release/moc_predefs.h \
 		C:/Qt/6.7.1/mingw_64/bin/moc.exe
-	C:\Qt\6.7.1\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/leocr/OneDrive/Documentos/UCR/Materiales/Año 2/1° Semestre/Programación 2/Proyecto 3/Project3_Frontend/Frontend/build/Desktop_Qt_6_7_1_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.7.1/mingw_64/mkspecs/win32-g++ -I"C:/Users/leocr/OneDrive/Documentos/UCR/Materiales/Año 2/1° Semestre/Programación 2/Proyecto 3/Project3_Frontend/Frontend" -IC:/Qt/6.7.1/mingw_64/include -IC:/Qt/6.7.1/mingw_64/include/QtWidgets -IC:/Qt/6.7.1/mingw_64/include/QtGui -IC:/Qt/6.7.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o release\moc_mainwindow.cpp
+	C:\Qt\6.7.1\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/gerar/Documents/UCR/Cursos/Programacion II/Proyectos Programados/Project3/build/Desktop_Qt_6_7_1_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.7.1/mingw_64/mkspecs/win32-g++ -I"C:/Users/gerar/Documents/UCR/Cursos/Programacion II/Proyectos Programados/Project3" -IC:/Qt/6.7.1/mingw_64/include -IC:/Qt/6.7.1/mingw_64/include/QtWidgets -IC:/Qt/6.7.1/mingw_64/include/QtGui -IC:/Qt/6.7.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o release\moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -771,8 +772,15 @@ release/gamewindow.o: ../../gamewindow.cpp ../../gamewindow.h \
 		C:/Qt/6.7.1/mingw_64/include/QtWidgets/qgraphicseffect.h \
 		ui_gamewindow.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/QVariant \
+		C:/Qt/6.7.1/mingw_64/include/QtGui/QIcon \
 		C:/Qt/6.7.1/mingw_64/include/QtWidgets/QApplication \
-		C:/Qt/6.7.1/mingw_64/include/QtWidgets/qapplication.h
+		C:/Qt/6.7.1/mingw_64/include/QtWidgets/qapplication.h \
+		../../Matrix.h \
+		../../Graph.h \
+		../../Node.h \
+		../../Node.cpp \
+		../../Graph.cpp \
+		../../Matrix.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\gamewindow.o ..\..\gamewindow.cpp
 
 release/main.o: ../../main.cpp ../../mainwindow.h \
@@ -975,12 +983,6 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt/6.7.1/mingw_64/include/QtWidgets/QMainWindow \
 		C:/Qt/6.7.1/mingw_64/include/QtWidgets/qmainwindow.h \
 		C:/Qt/6.7.1/mingw_64/include/QtWidgets/qtabwidget.h \
-		../../Matrix.h \
-		../../Graph.h \
-		../../Node.h \
-		../../Node.cpp \
-		../../Graph.cpp \
-		../../Matrix.cpp \
 		C:/Qt/6.7.1/mingw_64/include/QtWidgets/QApplication \
 		C:/Qt/6.7.1/mingw_64/include/QtWidgets/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\..\main.cpp
@@ -1187,6 +1189,7 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.1/mingw_64/include/QtWidgets/qtabwidget.h \
 		ui_mainwindow.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/QVariant \
+		C:/Qt/6.7.1/mingw_64/include/QtGui/QIcon \
 		C:/Qt/6.7.1/mingw_64/include/QtWidgets/QApplication \
 		C:/Qt/6.7.1/mingw_64/include/QtWidgets/qapplication.h \
 		C:/Qt/6.7.1/mingw_64/include/QtWidgets/QPushButton \

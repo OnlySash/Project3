@@ -61,6 +61,36 @@ void Matrix::connectNodes(){
         }
 }
 
+//Generate Adjacent connected graph
+void Matrix::connectAdjNodes(){
+    for (int i = 0; i<rows; i++)
+        for (int j = 0; j<cols; j++)
+        {
+            int putAdj = rand() % 2;
+            int directionAdj = rand() % 4;
+            //Direction up
+            if (i-1 >= 0 && putAdj == 1 && directionAdj == 0){
+                intGraph.addEdge(&boardMatrix[i][j], &boardMatrix[i-1][j]);
+                intGraph.addEdge(&boardMatrix[i-1][j], &boardMatrix[i][j]);
+            }
+            //Direction right
+            if (j+1 < cols && putAdj == 1 && directionAdj == 1){
+                intGraph.addEdge(&boardMatrix[i][j], &boardMatrix[i][j+1]);
+                intGraph.addEdge(&boardMatrix[i][j+1], &boardMatrix[i][j]);
+            }
+            //Direction down
+            if (i+1 < rows && putAdj == 1 && directionAdj == 2){
+                intGraph.addEdge(&boardMatrix[i][j], &boardMatrix[i+1][j]);
+                intGraph.addEdge(&boardMatrix[i+1][j], &boardMatrix[i][j]);
+            }
+            //Direction left
+            if (j-1 >= 0 && putAdj == 1 && directionAdj == 3){
+                intGraph.addEdge(&boardMatrix[i][j], &boardMatrix[i][j-1]);
+                intGraph.addEdge(&boardMatrix[i][j-1], &boardMatrix[i][j]);
+            }
+        }
+}
+
 void Matrix::applySearchAlgorithm()
 {
     if (intGraph.getAlgorithm() == "DFS")

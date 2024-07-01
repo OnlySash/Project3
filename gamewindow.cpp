@@ -28,6 +28,8 @@ void gamewindow::initializeNodeMatrix()
     printf("\n");
     m->connectNodes();
     m->applySearchAlgorithm();
+    m->connectAdjNodes();
+    m->connectAdjNodes();
 }
 
 void gamewindow::loadBackground()

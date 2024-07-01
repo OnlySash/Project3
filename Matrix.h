@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_map>
 #include <iostream>
+#include <random>
 class Matrix{
 private:
     int rows = 0;
@@ -19,6 +20,8 @@ public:
     Node<int>** boardMatrix;
     void printMatrix();
     void connectNodes();
+    void connectAdjNodes();
+    void connectRightLeftNodes();
     void applySearchAlgorithm();
     void updateCurrentNode(int row, int col);
     int getCurrentNode(int row, int col);
