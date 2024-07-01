@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>720</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Maze Knights Main Window</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="Images.qrc">
+    <normaloff>:/Images/Hunter.png</normaloff>:/Images/Hunter.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1283</width>
+      <height>720</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>-45</x>
+      <y>440</y>
+      <width>621</width>
+      <height>301</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Viner Hand ITC</family>
+      <pointsize>48</pointsize>
+      <bold>true</bold>
+      <strikeout>false</strikeout>
+     </font>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Maze Knights&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>-40</x>
+      <y>440</y>
+      <width>621</width>
+      <height>301</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Viner Hand ITC</family>
+      <pointsize>48</pointsize>
+      <bold>true</bold>
+      <strikeout>false</strikeout>
+     </font>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#c8c8c8;&quot;&gt;Maze Knights&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>1095</x>
+      <y>90</y>
+      <width>151</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Viner Hand ITC</family>
+      <pointsize>24</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>Start</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>35</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>35</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <zorder>label</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>label_2</zorder>
+   <zorder>label_3</zorder>
+   <zorder>label_4</zorder>
+   <zorder>label_5</zorder>
+  </widget>
+ </widget>
+ <resources>
+  <include location="Images.qrc"/>
+ </resources>
+ <connections/>
+</ui>

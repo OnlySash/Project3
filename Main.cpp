@@ -1,15 +1,14 @@
-#include "Matrix.h"
+#include "mainwindow.h"
+#include "gamewindow.h"
 #include <iostream>
 
-int main() {
-    for (int i = 0; i<4; i++)
-    {
-        // Integer graph
-        Matrix m;
-        m.printMatrix();
-        printf("\n");
-        m.connectNodes();
-    }
+#include <QApplication>
 
-    return 0;
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+
+    return a.exec();
 }

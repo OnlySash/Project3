@@ -1,5 +1,10 @@
 #include "Graph.h"
+#include <unordered_map>
+#include <vector>
+#include <list>
 #include <cstdlib>
+#include <ctime>
+#include <iostream>
 
 template<typename T>
 void Graph<T>::addNode(Node<T>* node) {
@@ -21,32 +26,24 @@ void Graph<T>::addEdge(Node<T>* src, Node<T>* dest) {
 }
 
 template<typename T>
-void Graph<T>::deleteEdge(Node<T>* src, std::unordered_map<Node<T>*, bool> visited) {
-    srand(time(0));
-    int edgesCounter = 0;
-    Node<T>** edgesArray = new Node<T>*[4];
-    for (auto it = adjLists[src].rbegin(); it != adjLists[src].rend(); ++it) {
-        if (!visited[*it])
-        {
-            Node<T>* node = *it;
-            edgesArray[edgesCounter] = node;
-            edgesCounter++;
+void Graph<T>::deleteEdges(Node<T>* src, std::unordered_map<Node<T>*, bool>& visited) {
+    std::vector<Node<T>*> edgesToRemove;
+    for (auto it = adjLists[src].begin(); it != adjLists[src].end(); ++it) {
+        if (!visited[*it]) {
+            edgesToRemove.push_back(*it);
         }
     }
-    if (edgesCounter >= 2) //edgesArray.size()
-    {
-        int randomNumber = rand() % edgesCounter;
-        for (int i = 0; i<edgesCounter; i++)
-        {
-            if (i != randomNumber)
-            {
-                adjLists[src].remove((edgesArray)[i]);
-                adjLists[(edgesArray)[i]].remove(src);
-            }
+    for (Node<T>* neighbor : edgesToRemove) {
+        if(neighbor != edgesToRemove[0]){
+            adjLists[src].remove(neighbor);
+            adjLists[neighbor].remove(src);
         }
-    }  
-    delete [] edgesArray;
-    this_thread::sleep_for(chrono::seconds(1));
+    }
+}
+
+template<typename T>
+string Graph<T>::getAlgorithm(){
+    return algorithm;
 }
 
 template<typename T>
@@ -54,22 +51,29 @@ void Graph<T>::DFS(Node<T>* startVertex) {
     std::unordered_map<Node<T>*, bool> visited;
     std::stack<Node<T>*> stack;
     stack.push(startVertex);
-    string output;
+
+    std::random_device rd;
+    std::mt19937 g(rd());
+
     while (!stack.empty()) {
         Node<T>* vertex = stack.top();
         stack.pop();
 
         if (!visited[vertex]) {
-            std::cout << vertex->getData() << " ";
             visited[vertex] = true;
-        }
-        deleteEdge(vertex, visited);
-        for (auto it = adjLists[vertex].rbegin(); it != adjLists[vertex].rend(); ++it) {
-            if (!visited[*it]) {
-                stack.push(*it);
+            deleteEdges(vertex, visited);
+            std::cout << vertex->getData() << " ";
+
+            // Obtener vecinos en un orden aleatorio
+            std::vector<Node<T>*> neighbors(adjLists[vertex].begin(), adjLists[vertex].end());
+            std::shuffle(neighbors.begin(), neighbors.end(), g);
+
+            // Agregar vecinos no visitados a la pila
+            for (Node<T>* neighbor : neighbors) {
+                if (!visited[neighbor]) {
+                    stack.push(neighbor);
+                }
             }
-            // Node<T>* node = *it;
-            // printf("\nVertex: %i, Adyacent Node: %i\n", (*vertex).getData(),(*node).getData());
         }
     }
 }
@@ -92,7 +96,17 @@ void Graph<T>::BFS(Node<T>* startVertex) {
                 queue.push(neighbor);
             }
         }
+        // if (!visited[vertex]) {
+        //     Node<T>* nextVertex = queue.front();
+        //     deleteEdges(vertex, nextVertex, visited);
+        // }
     }
+}
+
+template<typename T>
+std::unordered_map<Node<T>*, std::list<Node<T>*>> Graph<T>::getAdjList()
+{
+    return adjLists;
 }
 
 template class Graph<int>;  // Explicit template instantiation for int

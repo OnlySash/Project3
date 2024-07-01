@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>gamewindow</class>
+ <widget class="QWidget" name="gamewindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>720</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Maze Knights Game Window</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="Images.qrc">
+    <normaloff>:/Images/Hunter.png</normaloff>:/Images/Hunter.png</iconset>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1280</width>
+     <height>720</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>35</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>35</x>
+     <y>0</y>
+     <width>35</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>1070</x>
+     <y>650</y>
+     <width>151</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Viner Hand ITC</family>
+     <pointsize>24</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="Images.qrc"/>
+ </resources>
+ <connections/>
+</ui>
